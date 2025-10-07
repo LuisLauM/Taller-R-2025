@@ -2,11 +2,17 @@
 
 ## Detalles:
 
-* Horario:
-* Número de participantes:
+* Horario: martes y viernes, de 14:30 a 16:30.
+* Número de participantes: 7 participantes.
 
 ## Temas
 
+* Uso y manejo de Git y Github.
+* Bucles y condiconales.
+* Operaciones SIG en R/QGIS.
+* Creación de paquetes en R.
+* Creación de funciones en R.
+* Generación de reportes (Quarto/R markdown).
 
 ## Software requerido
 
