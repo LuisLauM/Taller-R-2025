@@ -23,3 +23,7 @@
 * [QGIS](https://qgis.org/download/)
 * [Python](https://www.python.org/downloads/)
 * [PowerToys](https://apps.microsoft.com/detail/xp89dcgq3k6vld?hl=es-ES&gl=PE)
+
+## Colab scripts
+
+* [dplyr, tidyr, ggplot2](https://colab.research.google.com/drive/16BzQ6iizMXLLt6pQjO1wBVfr6JqTJ1KS?usp=sharing)
