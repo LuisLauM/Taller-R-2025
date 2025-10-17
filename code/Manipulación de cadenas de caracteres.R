@@ -41,11 +41,12 @@ paste0(datosBotanicos$Common.Name, " [",
 
 # Concatenar cadenas (función sprintf) ------------------------------------
 
-sprintf("Nombres y apellidos: %s", "Wencheng Lau Medrano")
+sprintf(fmt = "Nombres y apellidos: %s", "Wencheng Lau Medrano")
 
-sprintf("Nombres: %s, Apellidos: %s", "Luis Wencheng", "Lau Medrano")
+sprintf(fmt = "Nombres: %s, Apellidos: %s", 
+        "Luis Wencheng", "Lau Medrano")
 
-sprintf("%04d", 7)
+sprintf(fmt = "Número: %04d", 7)
 
 sprintf("%04d", 70)
 
@@ -67,13 +68,13 @@ sprintf("%10.4f", pi)
 # Separar cadenas (función strsplit) --------------------------------------
 
 strsplit(
-  x = "Luis Wencheng Lau Medrano", 
-  split = " "
+  x = modelos, 
+  split = "R"
 )
 
 strsplit(
   x = "Luis Wencheng Lau Medrano", 
-  split = " "
+  split = "\\."
 ) |> 
   
   unlist()
@@ -112,7 +113,7 @@ head(generos_2)
 
 
 # Método 3
-generos_3 <- sapply(nombresCientificos, "[", 1)
+generos_3 <- sapply(X = nombresCientificos, FUN = "[", 1)
 
 head(generos_3)
 
@@ -178,7 +179,9 @@ tolower(nombre)
 toupper(nombre)
 
 # Reeemplazar caracteres espec?ficos por caracteres espec?ficos
-chartr(x = tolower(nombre), old = "áéíóúüñ", new = "aeiouun")
+chartr(x = tolower(nombre), 
+       old = "áéíóúüñ", 
+       new = "aeiouun")
 
 
 # Reemplazar cadenas ------------------------------------------------------
@@ -238,12 +241,20 @@ index <- grepl(x = nombresComunes, pattern = "(maple)|(^red)")
 nombresComunes[index]
 
 # Identificar aquellos elementos que contengan 'maple' y empiecen con 'red' 
+
+# Método 1
 index_1 <- grepl(x = nombresComunes, pattern = "maple")
 index_2 <- grepl(x = nombresComunes, pattern = "^red")
 
 nombresComunes[index_1 & index_2]
 
+# Método 2
+index <- grep(x = nombresComunes, pattern = "^red.*maple")
+nombresComunes[index]
+
 which(index_1 & index_2) # averiguar las posiciones en donde sucede esos casos
+
+
 
 # Identificar aquellos elementos que contengan números
 index <- grepl(x = nombresCientificos, pattern = "[[:digit:]]")

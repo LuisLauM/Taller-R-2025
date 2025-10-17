@@ -2,16 +2,18 @@
 # Leer valores ------------------------------------------------------------
 
 # Leer hoja 1
-readxl::read_excel(path = "data/datos_curso_Wendy.xlsx", sheet = 1, )
+require(readxl)
+
+read_excel(path = "data/datos_curso_Wendy.xlsx", sheet = 1)
 
 # Leer las tres hojas en un solo comando
 nombres <- lapply(
   X = 1:3, 
-  FUN = readxl::read_excel, 
-  path = "data/datos_curso.xlsx"
+  FUN = read_excel, 
+  path = "data/datos_curso_Wendy.xlsx"
 ) |> 
   
-  lapply(FUN = unlist) |> 
+  lapply(FUN = unlist) |>
   
   setNames(nm = c("emb_id", "destino", "armador"))
 
@@ -54,8 +56,7 @@ nombres$destino[index]
 index <- grepl(
   x = nombres$destino,
   pattern = "concosmar",
-  ignore.case = TRUE,
-  perl = TRUE
+  ignore.case = TRUE
 )
 
 nombres$destino[index]
