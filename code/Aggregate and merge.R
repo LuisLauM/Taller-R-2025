@@ -83,8 +83,8 @@ require(readxl)
 desembarques <- read_excel(path = "data/embarcaciones_desembarques.xlsx", 
                                    sheet = "Desembarques")
 
-embarcaciones <- readxl::read_excel(path = "data/embarcaciones_desembarques.xlsx", 
-                                    sheet = "Embarcaciones")
+embarcaciones <- read_excel(path = "data/embarcaciones_desembarques.xlsx", 
+                            sheet = "Embarcaciones")
 
 # Combinar tablas de datos teniendo en cuenta que la columna pivote tiene 
 # diferentes nombres en cada data.frame
@@ -92,4 +92,42 @@ dbCombinada <- merge(x = desembarques, y = embarcaciones,
                      by.x = "matrícula", by.y = "MATRICULA", all.x = TRUE)
 
 View(dbCombinada)
+
+
+
+require(dplyr)
+
+desembarques |> 
+  
+  left_join(
+    y = embarcaciones, 
+    by = c("matrícula" = "MATRICULA")
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

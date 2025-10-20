@@ -29,8 +29,8 @@ atributos_cms <- import(module = "copernicusmarine")
 
 # Definir atributos para la descarga
 atributos_cms$subset(
-  dataset_id        = "cmems_mod_glo_phy-thetao_anfc_0.083deg_P1D-m",
-  variables         = list("thetao"),
+  dataset_id        = "cmems_mod_glo_phy_myint_0.083deg_P1D-m",
+  variables         = list("thetao", "so"),
   minimum_longitude = -85,
   maximum_longitude = -74,
   minimum_latitude  = -15,
@@ -38,9 +38,8 @@ atributos_cms$subset(
   start_datetime    = "2023-03-01T00:00:00",
   end_datetime      = "2023-03-31T00:00:00",
   minimum_depth     = 0,
-  maximum_depth     = 0.5,
-  output_filename   = "raw/sst_peru_ejemplo1.nc",
-  force_download    = TRUE
+  maximum_depth     = 1000,
+  output_filename   = "raw/sst_peru_ejemplo1.nc"
 )
 
 # Mostrar todas las opciones disponibles
@@ -64,7 +63,7 @@ fechas <- seq(from = as.Date("2023-1-1"),
 
 for(i in seq(length(fechas) - 1)){
   atributos_cms$subset(
-    dataset_id        = "cmems_mod_glo_phy-thetao_anfc_0.083deg_P1D-m",
+    dataset_id        = "cmems_mod_glo_phy_myint_0.083deg_P1D-m",
     variables         = list("thetao"),
     minimum_longitude = -85,
     maximum_longitude = -74,
@@ -74,7 +73,6 @@ for(i in seq(length(fechas) - 1)){
     end_datetime      = format(x = fechas[i + 1] - 1, format = "%Y-%m-%dT00:00:00"),
     minimum_depth     = 0,
     maximum_depth     = 0.5,
-    output_filename   = sprintf("raw/%s.nc", format(x = fechas[i], format = "%Y_%m (%B %Y)")),
-    force_download    = TRUE
+    output_filename   = sprintf("raw/%s.nc", format(x = fechas[i], format = "%Y_%m (%B %Y)"))
   ) 
 }
