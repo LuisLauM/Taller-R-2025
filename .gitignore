@@ -47,3 +47,6 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+/data/shapefiles/coastlines-split-4326
+/data/shapefiles/gadm41_PER.gpkg
+/data/shapefiles/dist_costa.nc

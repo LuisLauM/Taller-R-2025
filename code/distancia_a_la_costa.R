@@ -76,22 +76,22 @@ abline(a = 0, b = 1, col = "red")
 
 # Distancia a la costa: Método 2 ------------------------------------------
 
-require(rerddap)
+# require(rerddap)
 
 # Ejecutar descarga
-distcostaraster <- griddap(datasetx  = "dist2coast_1deg_ocean", 
-                           fields    = "dist",
-                           latitude  = c(-20, 0), 
-                           longitude = c(-100, -70),
-                           store     = disk("raw/"),
-                           read      = FALSE) 
+# distcostaraster <- griddap(datasetx  = "dist2coast_1deg_ocean", 
+#                            fields    = "dist",
+#                            latitude  = c(-20, 0), 
+#                            longitude = c(-100, -70),
+#                            store     = disk("raw/"),
+#                            read      = FALSE) 
 
 # Renombrar archivo
-file.rename(from = distcostaraster$summary$filename, 
-            to = "raw/dist_costa.nc")
+# file.rename(from = distcostaraster$summary$filename, 
+#             to = "raw/dist_costa.nc")
 
 # Leer netCDF con valores de distancia a la costa
-distancias_metodo2 <- rast(x = "raw/dist_costa.nc") |> 
+distancias_metodo2 <- rast(x = "data/shapefiles/dist_costa.nc") |> 
   
   # Extraer valores de distancia a la costa
   extract(y = puntosEjemplo) |> 
@@ -118,10 +118,10 @@ abline(a = 0, b = 1, col = "red")
 require(terra)
 
 # Check layers of Peruvian polygon dataset
-sf::st_layers(dsn = "data/gadm41_PER.gpkg")
+sf::st_layers(dsn = "data/shapefiles/gadm41_PER.gpkg")
 
 # Read main polygon of Peru
-peru <- vect(x = "data/gadm41_PER.gpkg", 
+peru <- vect(x = "data/shapefiles/gadm41_PER.gpkg", 
              layer = "ADM_ADM_0")
 
 # Convert lon/lat coordinates 
