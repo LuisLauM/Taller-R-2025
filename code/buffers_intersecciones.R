@@ -34,7 +34,7 @@ datos_validos_sf
 
 class(datos_validos_sf)
 
-# st_layers(dsn = "C:/Users/demersales1/Documents/shapefiles/PER-eez/eez.shp")
+# st_layers(dsn = "data/shapefiles/PER-eez/eez.shp")
 peru_eez <- st_read(
   dsn = "C:/Users/demersales1/Documents/shapefiles/PER-eez/eez.shp",
   layer = "eez"
@@ -56,18 +56,6 @@ table(peru_eez$mrgid)
 # A partir del df datos
 datos_dentro_eez <- datos_validos_sf |> 
   
-  # Mantener aquellas filas sin NA en lon y lat
-  filter(complete.cases(lon, lat)) |> 
-  
-  # Convertir df a objeto sf
-  st_as_sf(
-    # Indicar columnas de coordenadas
-    coords = c("lon", "lat"),
-    
-    # Indicar sistema de coordenadas (4326: WGS84)
-    crs = 4326
-  ) |> 
-  
   # Filtrar solo aquellos puntos que caen dentro del polígono peru_eez
   st_filter(y = peru_eez[,1])
 
@@ -77,8 +65,8 @@ dim(x = datos_dentro_eez)
 
 # Graficar todos los puntos
 plot(
-  x = datos_validos_sf$lon, 
-  y = datos_validos_sf$lat, 
+  x = datos$lon, 
+  y = datos$lat, 
   pch = 16,
   cex = 0.5,
   asp = 1
@@ -108,18 +96,6 @@ plot(
 # Ubicar cuáles puntos están dentro (y cuáles fuera) de la EEZ-Perú 
 
 datos_en_eez <- datos_validos_sf |> 
-  
-  # Mantener aquellas filas sin NA en lon y lat
-  filter(complete.cases(lon, lat)) |> 
-  
-  # Convertir df a objeto sf
-  st_as_sf(
-    # Indicar columnas de coordenadas
-    coords = c("lon", "lat"),
-    
-    # Indicar sistema de coordenadas (4326: WGS84)
-    crs = 4326
-  ) |>
   
   # Cruzar puntos y polígono de peru_eez
   st_join(y = peru_eez[,1])
@@ -304,16 +280,6 @@ plot(
 # Averiguar qué puntos de 'datos_validos_sf' se encuentran dentro de las 5 mn
 
 datos_eez_5mn <- datos_validos_sf |> 
-  
-  filter(complete.cases(lon, lat)) |> 
-  
-  st_as_sf(
-    # Indicar columnas de coordenadas
-    coords = c("lon", "lat"),
-    
-    # Indicar sistema de coordenadas (4326: WGS84)
-    crs = 4326
-  ) |> 
   
   # Cruzar puntos y polígono de peru_eez
   st_join(y = peru_eez[,1]) |> 
